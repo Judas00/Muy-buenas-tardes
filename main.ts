@@ -1,4 +1,3 @@
-let bola2: Sprite;
 info.setLife(1)
 // Medidior de cuantos "golpes" puedes recibir.
 scene.setBackgroundImage(img`
@@ -238,10 +237,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_on_overlap(sp
     info.changeLifeBy(-1)
 })
 //  comprobacion de colisiones.
-if (info.score() == 20) {
-    bola2.left = scene.screenWidth()
-    // La posicion donde aparece el cuerpo que te persigue es aleatoria (Al principio esta linea no estaba. Tuve que añadirla porque sino pierdes instantaniamente,ya que este hace spawn en el mismo sitio que tú)
-    bola2 = sprites.create(img`
+// AAAAAAAAAAAAAAAAA
+let bola2 = sprites.create(img`
         . . . . . . . . . . . . . . . .
         . . . . . . 2 2 2 2 2 e . . . .
         . . . . . 2 2 2 2 d 2 2 e . . .
@@ -258,11 +255,13 @@ if (info.score() == 20) {
         f f f . f f f e . . . . . . . .
         f f . . . . e e e . . . . . . .
         . . . . . . e e e e . . . . . .
-    `, SpriteKind.Enemy)
-    //  Definir el como se ve el cuerpo que va a estar rebotando y tu personaje tiene que esquivar.
-    bola2.setBounceOnWall(true)
-    // La linea hace que el personaje no se puede salir de la pantalla
-    bola2.setVelocity(90, 90)
-    // La velocidad a la cual se va a mover el cuerpo que te persigue
-}
-
+ `, SpriteKind.Enemy)
+//  Definir el como se ve el cuerpo que va a estar rebotando y tu personaje tiene que esquivar.
+bola2.setPosition(randint(0, 160), randint(0, 120))
+// La posicion donde aparece el cuerpo que te persigue es aleatoria (Al principio esta linea no estaba. Tuve que añadirla porque sino pierdes instantaniamente,ya que este hace spawn en el mismo sitio que tú)
+bola2.setBounceOnWall(true)
+// La linea hace que el personaje no se puede salir de la pantalla
+bola2.setVelocity(90, 90)
+// La velocidad a la cual se va a mover el cuerpo que te persigue
+// Esta linea comprueba que cuerpos estan colapsando con que. 
+music.playMelody("Em G D A7sus4", 90)

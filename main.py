@@ -218,10 +218,9 @@ game.on_update_interval(1000, on_update_interval)# Valor de cada cuanto aparecen
 def on_on_overlap(sprite, otherSprite): #Cuando tu sprite entra en contacto en un proyectil pasara esto:    
     info.change_life_by(-1) # Se te reduce en 1 la vida, haciendo que mueras.
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap)# comprobacion de colisiones.
+#AAAAAAAAAAAAAAAAA
 
-if info.score() == 20:
-    bola2.left = scene.screen_width() #La posicion donde aparece el cuerpo que te persigue es aleatoria (Al principio esta linea no estaba. Tuve que añadirla porque sino pierdes instantaniamente,ya que este hace spawn en el mismo sitio que tú)
-    bola2  = sprites.create(img("""
+bola2  = sprites.create(img("""
         . . . . . . . . . . . . . . . .
         . . . . . . 2 2 2 2 2 e . . . .
         . . . . . 2 2 2 2 d 2 2 e . . .
@@ -238,9 +237,14 @@ if info.score() == 20:
         f f f . f f f e . . . . . . . .
         f f . . . . e e e . . . . . . .
         . . . . . . e e e e . . . . . .
-    """), SpriteKind.enemy)# Definir el como se ve el cuerpo que va a estar rebotando y tu personaje tiene que esquivar.
-    bola2.set_bounce_on_wall(True) #La linea hace que el personaje no se puede salir de la pantalla
-    bola2.set_velocity(90 , 90) #La velocidad a la cual se va a mover el cuerpo que te persigue
-    def on_overlap3(sprite, otherSprite): #Cuando el personaje entre en contacto con lo que te persigue ocurrira:
-        info.change_life_by(-1) # Tu medidor de vida bajara en 1, haciendo que pierdas la partida
+ """), SpriteKind.enemy)# Definir el como se ve el cuerpo que va a estar rebotando y tu personaje tiene que esquivar.
+bola2.set_position(randint(0, 160), randint(0, 120)) #La posicion donde aparece el cuerpo que te persigue es aleatoria (Al principio esta linea no estaba. Tuve que añadirla porque sino pierdes instantaniamente,ya que este hace spawn en el mismo sitio que tú)
+bola2.set_bounce_on_wall(True) #La linea hace que el personaje no se puede salir de la pantalla
+bola2.set_velocity(90 , 90) #La velocidad a la cual se va a mover el cuerpo que te persigue
+def on_overlap3(sprite, otherSprite): #Cuando el personaje entre en contacto con lo que te persigue ocurrira:
+    info.change_life_by(-1) # Tu medidor de vida bajara en 1, haciendo que pierdas la partida
+    if info.score() == 20:
         sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_overlap3)#Esta linea comprueba que cuerpos estan colapsando con que. 
+        
+
+music.play_melody("Em G D A7sus4", 90)
